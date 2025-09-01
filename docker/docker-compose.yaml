@@ -1,0 +1,32 @@
+services:
+  authservice:
+    build:
+      context: "/home/mikhail/RiderProjects/MicroSystem"
+      dockerfile: AuthService/Dockerfile
+    container_name: aspnet-authservice
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__RegisterDbContext=Host=postgres;Port=5432;Database=users;Username=postgres;Password=123
+    ports:
+      - "5000:8080"
+    depends_on:
+      - postgres
+    networks:
+      - app-network
+  postgres:
+    image: postgres:15
+    container_name: postgres-db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: users
+    networks:
+      - app-network
+      
+volumes:
+  pgdata:
+    
+networks:
+  app-network:
+    driver: bridge
