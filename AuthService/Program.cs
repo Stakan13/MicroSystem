@@ -1,5 +1,7 @@
+using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using MicroSystem.Api.Validation;
 using MicroSystem.Domain.Interfaces;
 using MicroSystem.Infrastructure.Data;
 using MicroSystem.Infrastructure.Data.Repos;
@@ -13,6 +15,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddScoped<IUserRepository,  UserRepository>();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+builder.Services.AddScoped<IValidator<User>, RegisterValidation>();
 
 builder.Services.AddDbContext<UserDbContext>(options => 
     options.UseNpgsql(builder.Configuration.GetConnectionString("RegisterDbContext")));

@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "kgi1rwE84Ng=",
+  "dgSpecHash": "of2YXptTsRw=",
   "success": true,
   "projectFilePath": "/home/mikhail/RiderProjects/MicroSystem/AuthService/AuthService.csproj",
   "expectedPackageFiles": [
+    "/home/mikhail/.nuget/packages/fluentvalidation/12.0.0/fluentvalidation.12.0.0.nupkg.sha512",
     "/home/mikhail/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/home/mikhail/.nuget/packages/microsoft.aspnetcore.openapi/9.0.5/microsoft.aspnetcore.openapi.9.0.5.nupkg.sha512",
     "/home/mikhail/.nuget/packages/microsoft.bcl.asyncinterfaces/7.0.0/microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",

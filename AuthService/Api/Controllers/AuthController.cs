@@ -31,8 +31,9 @@ public class AuthController : ControllerBase
             return BadRequest("Email is already taken");
         }
 
-        var user = new User(request.Username, request.PasswordHash, request.Email);
-        _passwordHasher.HashPassword(user, request.PasswordHash);
+        var user = new User(request.Username, 
+            _passwordHasher.HashPassword(null, request.PasswordHash), 
+            request.Email);
         
         await _userRepository.AddUserAsync(user, ct);
         await _userRepository.SaveChangesAsync(ct);
