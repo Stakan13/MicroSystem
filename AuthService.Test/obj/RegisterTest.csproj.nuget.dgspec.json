@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/mikhail/RiderProjects/MicroSystem/AuthService/AuthService.csproj": {}
+    "/home/mikhail/RiderProjects/MicroSystem/RegisterTest/RegisterTest.csproj": {}
   },
   "projects": {
-    "/home/mikhail/RiderProjects/MicroSystem/AuthService/AuthService.csproj": {
+    "/home/mikhail/RiderProjects/MicroSystem/RegisterTest/RegisterTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/mikhail/RiderProjects/MicroSystem/AuthService/AuthService.csproj",
-        "projectName": "AuthService",
-        "projectPath": "/home/mikhail/RiderProjects/MicroSystem/AuthService/AuthService.csproj",
+        "projectUniqueName": "/home/mikhail/RiderProjects/MicroSystem/RegisterTest/RegisterTest.csproj",
+        "projectName": "RegisterTest",
+        "projectPath": "/home/mikhail/RiderProjects/MicroSystem/RegisterTest/RegisterTest.csproj",
         "packagesPath": "/home/mikhail/.nuget/packages/",
-        "outputPath": "/home/mikhail/RiderProjects/MicroSystem/AuthService/obj/",
+        "outputPath": "/home/mikhail/RiderProjects/MicroSystem/RegisterTest/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/mikhail/.nuget/NuGet/NuGet.Config"
@@ -44,35 +44,21 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
-            "FluentValidation": {
+            "Microsoft.NET.Test.Sdk": {
               "target": "Package",
-              "version": "[12.0.0, )"
+              "version": "[17.12.0, )"
             },
-            "Microsoft.AspNetCore.OpenApi": {
+            "coverlet.collector": {
               "target": "Package",
-              "version": "[9.0.5, )"
+              "version": "[6.0.2, )"
             },
-            "Microsoft.EntityFrameworkCore": {
+            "xunit": {
               "target": "Package",
-              "version": "[9.0.8, )"
+              "version": "[2.9.2, )"
             },
-            "Microsoft.EntityFrameworkCore.Design": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
+            "xunit.runner.visualstudio": {
               "target": "Package",
-              "version": "[9.0.8, )"
-            },
-            "Npgsql": {
-              "target": "Package",
-              "version": "[9.0.3, )"
-            },
-            "Npgsql.EntityFrameworkCore.PostgreSQL": {
-              "target": "Package",
-              "version": "[9.0.4, )"
-            },
-            "Swashbuckle.AspNetCore": {
-              "target": "Package",
-              "version": "[9.0.4, )"
+              "version": "[2.8.2, )"
             }
           },
           "imports": [
@@ -93,9 +79,6 @@
             }
           ],
           "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }

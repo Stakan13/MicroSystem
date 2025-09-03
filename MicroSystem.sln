@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthService", "AuthService\AuthService.csproj", "{4B295537-0E6A-41ED-885A-FCE6454457FE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthService.Test", "AuthService.Test\AuthService.Test.csproj", "{C2ECD697-56D2-4315-A90C-2265125C9621}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{4B295537-0E6A-41ED-885A-FCE6454457FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B295537-0E6A-41ED-885A-FCE6454457FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B295537-0E6A-41ED-885A-FCE6454457FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2ECD697-56D2-4315-A90C-2265125C9621}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2ECD697-56D2-4315-A90C-2265125C9621}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2ECD697-56D2-4315-A90C-2265125C9621}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2ECD697-56D2-4315-A90C-2265125C9621}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
