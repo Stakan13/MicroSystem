@@ -131,3 +131,5 @@
 /home/mikhail/RiderProjects/MicroSystem/AuthService/obj/Debug/net9.0/AuthService.pdb
 /home/mikhail/RiderProjects/MicroSystem/AuthService/obj/Debug/net9.0/AuthService.genruntimeconfig.cache
 /home/mikhail/RiderProjects/MicroSystem/AuthService/obj/Debug/net9.0/ref/AuthService.dll
+/home/mikhail/RiderProjects/MicroSystem/AuthService/bin/Debug/net9.0/FluentValidation.dll
+/home/mikhail/RiderProjects/MicroSystem/AuthService/obj/Debug/net9.0/AuthService.sourcelink.json

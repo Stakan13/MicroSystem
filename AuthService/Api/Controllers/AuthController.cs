@@ -24,13 +24,6 @@ public class AuthController : ControllerBase
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterRequest request, CancellationToken ct)
     {
-        bool isExist = await _userRepository.ExistsUserAsync(request.Email, ct);
-        
-        if (isExist)
-        {
-            return BadRequest("Email is already taken");
-        }
-
         var user = new User(request.Username, 
             _passwordHasher.HashPassword(null, request.PasswordHash), 
             request.Email);

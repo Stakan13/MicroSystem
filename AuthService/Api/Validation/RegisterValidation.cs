@@ -4,7 +4,7 @@ using MicroSystem.Models;
 
 namespace MicroSystem.Api.Validation;
 
-public class RegisterValidation : AbstractValidator<User>, IValidator<User>
+public class RegisterValidation : AbstractValidator<User>
 {
     private readonly IUserRepository _userRepository;
     
@@ -13,16 +13,16 @@ public class RegisterValidation : AbstractValidator<User>, IValidator<User>
         _userRepository = userRepository;
         
         RuleFor(x => x.UserName)
-            .NotEmpty().WithMessage("Username is required").WithErrorCode("Enmpty_Username")
+            .NotEmpty().WithMessage("Username is required")
             .Length(3, 100).WithMessage("Username must be between 3 and 100 characters");
         
         RuleFor(x => x.Email)
-            .NotEmpty().WithMessage("Email is required").WithErrorCode("Enmpty_Email")
+            .NotEmpty().WithMessage("Email is required")
             .EmailAddress().WithMessage("Email is invalid")
             .MustAsync(BeUniqueEmail).WithMessage("Email already exists");
         
         RuleFor(x => x.PasswordHash)
-            .NotEmpty().WithMessage("Password is required").WithErrorCode("Enmpty_Password")
+            .NotEmpty().WithMessage("Password is required")
             .MinimumLength(6).WithMessage("Password must be at least 6 characters")
             .Matches("[A-Z]").WithMessage("Password must be at least 6 characters")
             .Matches("[a-z]").WithMessage("Password must be at least 6 characters")
