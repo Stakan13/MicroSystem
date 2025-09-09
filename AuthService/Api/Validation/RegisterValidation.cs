@@ -1,10 +1,11 @@
 using FluentValidation;
+using MicroSystem.Api.Dtos;
+using MicroSystem.Domain.Entities;
 using MicroSystem.Domain.Interfaces;
-using MicroSystem.Models;
 
 namespace MicroSystem.Api.Validation;
 
-public class RegisterValidation : AbstractValidator<User>, IValidator<User>
+public class RegisterValidation : AbstractValidator<RegisterRequest>
 {
     private readonly IUserRepository _userRepository;
     
@@ -12,25 +13,25 @@ public class RegisterValidation : AbstractValidator<User>, IValidator<User>
     {
         _userRepository = userRepository;
         
-        RuleFor(x => x.UserName)
-            .NotEmpty().WithMessage("Username is required").WithErrorCode("Enmpty_Username")
+        RuleFor(x => x.Username)
+            .NotEmpty().WithMessage("Username is required")
             .Length(3, 100).WithMessage("Username must be between 3 and 100 characters");
-        
+
         RuleFor(x => x.Email)
-            .NotEmpty().WithMessage("Email is required").WithErrorCode("Enmpty_Email")
+            .NotEmpty().WithMessage("Email is required")
             .EmailAddress().WithMessage("Email is invalid")
-            .MustAsync(BeUniqueEmail).WithMessage("Email already exists");
+            .MustAsync(async (email, ct) =>
+            {
+                bool isExist = await _userRepository.ExistsUserAsync(email, ct);
+                return !isExist;
+                
+            }).WithMessage("Email must be unique");
         
         RuleFor(x => x.PasswordHash)
-            .NotEmpty().WithMessage("Password is required").WithErrorCode("Enmpty_Password")
+            .NotEmpty().WithMessage("Password is required")
             .MinimumLength(6).WithMessage("Password must be at least 6 characters")
-            .Matches("[A-Z]").WithMessage("Password must be at least 6 characters")
-            .Matches("[a-z]").WithMessage("Password must be at least 6 characters")
-            .Matches("[0-9]").WithMessage("Password must be at least 6 characters");
-    }
-
-    private async Task<bool> BeUniqueEmail(string email, CancellationToken ct)
-    {
-        return await _userRepository.ExistsUserAsync(email, ct);
+            .Matches("[A-Z]").WithMessage("Password must contain at least one uppercase letter")
+            .Matches("[a-z]").WithMessage("Password must contain at least one lowercase letter")
+            .Matches("[0-9]").WithMessage("Password must contain at least one digit");
     }
 }

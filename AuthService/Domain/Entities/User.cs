@@ -1,4 +1,4 @@
-namespace MicroSystem.Models;
+namespace MicroSystem.Domain.Entities;
 
 public class User
 {

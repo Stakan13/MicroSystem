@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using MicroSystem.Models;
+using MicroSystem.Domain.Entities;
 
 namespace MicroSystem.Infrastructure.Configurations;
 

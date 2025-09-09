@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using MicroSystem.Models;
+using MicroSystem.Domain.Entities;
 
 namespace MicroSystem.Infrastructure.Data;
 
