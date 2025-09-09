@@ -1,4 +1,4 @@
-using MicroSystem.Models;
+using MicroSystem.Domain.Entities;
 
 namespace MicroSystem.Domain.Interfaces;
 

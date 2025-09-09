@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using MicroSystem.Domain.Entities;
 using MicroSystem.Domain.Interfaces;
-using MicroSystem.Models;
 
 namespace MicroSystem.Infrastructure.Data.Repos;
 

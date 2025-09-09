@@ -1,10 +1,10 @@
+using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MicroSystem.Api.Dtos;
+using MicroSystem.Domain.Entities;
 using MicroSystem.Domain.Interfaces;
-using MicroSystem.Infrastructure.Data;
-using MicroSystem.Infrastructure.Data.Repos;
-using MicroSystem.Models;
+
 
 namespace MicroSystem.Api.Controllers;
 
@@ -14,16 +14,27 @@ public class AuthController : ControllerBase
 {
     private readonly IUserRepository _userRepository;
     private readonly IPasswordHasher<User> _passwordHasher;
+    private readonly IValidator<RegisterRequest> _registerValidator;
 
-    public AuthController(IUserRepository userRepository, IPasswordHasher<User> passwordHasher)
+    public AuthController(IUserRepository userRepository, 
+        IPasswordHasher<User> passwordHasher,
+        IValidator<RegisterRequest> userValidator)
     {
         _userRepository = userRepository;
         _passwordHasher = passwordHasher;
+        _registerValidator = userValidator;
     }
 
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterRequest request, CancellationToken ct)
     {
+        var result = await _registerValidator.ValidateAsync(request, ct);
+
+        if (!result.IsValid)
+        {
+            return BadRequest(result.Errors);
+        }
+        
         var user = new User(request.Username, 
             _passwordHasher.HashPassword(null, request.PasswordHash), 
             request.Email);

@@ -1,91 +1,95 @@
 ﻿using FluentValidation.TestHelper;
+using MicroSystem.Api.Dtos;
 using MicroSystem.Api.Validation;
 using MicroSystem.Domain.Interfaces;
-using MicroSystem.Models;
 using Moq;
 
-namespace RegisterTest;
+namespace RegisterTest.RegisterTests;
 
 public class RegisterUnitTests
 {
     [Fact]
-    public void Test_EmptyUsername_ReturnError()
+    public async Task Test_EmptyUsername_ReturnError()
     {
         // Arrange
         var userRepository = new Mock<IUserRepository>();
         var registerValidation = new RegisterValidation(userRepository.Object);
         
-        var emptyUsername = new User("", "1234", "shortUsername@gmail.com");
+        var emptyUsername = new RegisterRequest("", "1234ASFa", "shortUsername@gmail.com");
         
         //Act
-        var result = registerValidation.Validate(emptyUsername);
+        var result = await registerValidation.TestValidateAsync(emptyUsername);
         
         //Assert
-        Assert.False(result.IsValid);;
+        result.ShouldHaveValidationErrorFor(x => x.Username);
     }
     
     [Fact]
-    public void Test_ShortUsername_ReturnError()
+    public async Task Test_ShortUsername_ReturnError()
     {
         // Arrange
         var userRepository = new Mock<IUserRepository>();
         var registerValidation = new RegisterValidation(userRepository.Object);
         
-        var shortUsername = new User("av", "1234", "shortUsername@gmail.com");
+        var shortUsername = new RegisterRequest("av", "1234ASFa", "shortUsername@gmail.com");
         
         //Act
-        var result = registerValidation.Validate(shortUsername);
+        var result = await registerValidation.TestValidateAsync(shortUsername);
         
         //Assert
-        Assert.False(result.IsValid);
+        result.ShouldHaveValidationErrorFor(x => x.Username);
     }
     
     [Fact]
-    public void Test_ValidUsername_ReturnError()
+    public async Task Test_ValidUsername_ReturnTrue()
     {
         // Arrange
         var userRepository = new Mock<IUserRepository>();
-        var registerValidation = new RegisterValidation(userRepository.Object);
         
-        var validUsername = new User("aboba", "1234", "shortUsername@gmail.com");
+        userRepository.Setup(x => 
+                x.ExistsUserAsync("validUsername@gmail.com", CancellationToken.None))
+            .ReturnsAsync(false);
+        
+        var registerValidation = new RegisterValidation(userRepository.Object);
+        var validUsername = new RegisterRequest("aboba", "1234ASFa", "validUsername@gmail.com");
         
         //Act
-        var result = registerValidation.Validate(validUsername);
+        var result = await registerValidation.TestValidateAsync(validUsername);
         
         //Assert
-        Assert.True(result.IsValid);
+        result.ShouldNotHaveAnyValidationErrors();
     }
     
     [Fact]
-    public void Test_EmptyEmail_ReturnError()
+    public async Task Test_EmptyEmail_ReturnError()
     {
         // Arrange
         var userRepository = new Mock<IUserRepository>();
         var registerValidation = new RegisterValidation(userRepository.Object);
         
-        var emptyEmail = new User("sigma", "1234", "");
+        var emptyEmail = new RegisterRequest("sigma", "1234ASFa", "");
         
         //Act
-        var result = registerValidation.Validate(emptyEmail);
+        var result = await registerValidation.TestValidateAsync(emptyEmail);
         
         //Assert
-        Assert.False(result.IsValid);
+        result.ShouldHaveValidationErrorFor(x => x.Email);
     }
     
     [Fact]
-    public void Test_InvalidEmail_ReturnError()
+    public async Task Test_InvalidEmail_ReturnError()
     {
         // Arrange
         var userRepository = new Mock<IUserRepository>();
         var registerValidation = new RegisterValidation(userRepository.Object);
         
-        var invalidEmail = new User("peakme", "1234", "shortUsernamesobakagmail.com");
+        var invalidEmail = new RegisterRequest("peakme", "1234ASFa", "shortUsernamesobakagmail.com");
         
         //Act
-        var result = registerValidation.Validate(invalidEmail);
+        var result = await registerValidation.TestValidateAsync(invalidEmail);
         
         //Assert
-        Assert.False(result.IsValid);
+        result.ShouldHaveValidationErrorFor(x => x.Email);
     }
     
     [Fact]
@@ -100,13 +104,13 @@ public class RegisterUnitTests
         
         var registerValidation = new RegisterValidation(userRepository.Object);
         
-        var existingEmail = new User("alpha", "1234", "shortUsername@gmail.com");
+        var existingEmail = new RegisterRequest("alpha", "1234ASFa", "shortUsername@gmail.com");
         
         //Act
-        var result = await registerValidation.ValidateAsync(existingEmail);
+        var result = await registerValidation.TestValidateAsync(existingEmail);
         
         //Assert
-        Assert.False(result.IsValid);
+        result.ShouldHaveValidationErrorFor(x => x.Email);
         
         userRepository.Verify(x => 
             x.ExistsUserAsync("shortUsername@gmail.com", CancellationToken.None), Times.Once);
