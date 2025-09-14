@@ -7,8 +7,11 @@ using MicroSystem.Domain.Entities;
 using MicroSystem.Domain.Interfaces;
 using MicroSystem.Infrastructure.Data;
 using MicroSystem.Infrastructure.Data.Repos;
+using Prometheus;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.WebHost.UseUrls("http://0.0.0.0:5000");
 
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
@@ -37,9 +40,10 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.UseHttpsRedirection();
-
 app.UseRouting();
-
 app.MapControllers();
+
+app.UseMetricServer();
+app.UseHttpMetrics();
 
 app.Run();

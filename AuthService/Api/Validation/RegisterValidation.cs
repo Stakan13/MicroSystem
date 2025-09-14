@@ -1,6 +1,5 @@
 using FluentValidation;
 using MicroSystem.Api.Dtos;
-using MicroSystem.Domain.Entities;
 using MicroSystem.Domain.Interfaces;
 
 namespace MicroSystem.Api.Validation;

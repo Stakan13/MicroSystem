@@ -10,4 +10,5 @@ public interface IUserRepository
     Task AddUserAsync(User user, CancellationToken cancellationToken);
     Task DeleteUserAsync(User user, CancellationToken cancellationToken);
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
+    Task<User?> FindUserByEmailAsync(string email, CancellationToken cancellationToken);
 }

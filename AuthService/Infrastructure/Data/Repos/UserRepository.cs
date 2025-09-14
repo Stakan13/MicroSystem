@@ -43,4 +43,9 @@ public class UserRepository : IUserRepository
     {
         return await _context.SaveChangesAsync(cancellationToken);
     }
+
+    public async Task<User?> FindUserByEmailAsync(string email, CancellationToken cancellationToken)
+    {
+        return await _context.Users.FirstOrDefaultAsync(x => x.Email == email, cancellationToken);
+    }
 }
